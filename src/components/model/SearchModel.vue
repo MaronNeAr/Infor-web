@@ -11,7 +11,7 @@
       </div>
       <!-- 输入框 -->
       <div class="search-input-wrapper">
-        <svg class="icon" aria-hidden="true" style="margin-right: 4px">
+        <svg class="icon" aria-hidden="true" style="margin-right: 5px">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
         <input v-model="keywords" placeholder="输入文章标题或内容..." />

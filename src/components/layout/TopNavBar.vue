@@ -62,10 +62,10 @@
           </router-link>
         </div>
         <div class="menus-item">
-          <router-link to="/links">
+          <router-link to="/card">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-lianjie"></use>
-            </svg> <span style="color: white;font-weight: bolder">友链</span>
+            </svg> <span style="color: white;font-weight: bolder">卡证</span>
           </router-link>
         </div>
         <div class="menus-item">

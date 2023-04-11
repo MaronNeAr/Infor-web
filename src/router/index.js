@@ -7,7 +7,8 @@ import Markdown from "../views/Markdown.vue";
 import Resume from "../views/Resume.vue";
 // import Tag from "../views/tag/Tag.vue";
 // import Category from "../views/category/Category.vue";
-import Link from "../views/link/Link.vue";
+// import Link from "../views/link/Link.vue";
+import Card from "../views/Card.vue";
 import About from "../views/about/About.vue";
 import Message from "../views/message/Messsage.vue";
 import ArticleList from "../components/ArticleList.vue";
@@ -49,8 +50,8 @@ const routes = [
     component: ArticleList
   },
   {
-    path: "/links",
-    component: Link
+    path: "/card",
+    component: Card
   },
   {
     path: "/about",

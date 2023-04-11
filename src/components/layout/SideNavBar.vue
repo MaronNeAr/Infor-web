@@ -180,15 +180,15 @@ export default {
       if (this.$route.path == "/user") {
         this.$router.go(-1);
       }
-      this.axios.get("/api/logout").then((res) => {
-        const cons = res.data;
-        if (cons.flag) {
-          this.$store.commit("logoutBlog");
-          this.$toast({ type: "success", message: cons.message });
-        } else {
-          this.$toast({ type: "error", message: "注销失败" });
-        }
-      });
+      // this.axios.get("/api/logout").then((res) => {
+      //   const cons = res.data;
+      //   if (cons.flag) {
+      //     this.$store.commit("logoutBlog");
+      //     this.$toast({ type: "success", message: cons.message });
+      //   } else {
+      //     this.$toast({ type: "error", message: "注销失败" });
+      //   }
+      // });
     }
   }
 };

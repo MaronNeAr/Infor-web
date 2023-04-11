@@ -331,30 +331,30 @@ export default {
       const typed = new EasyTyper(obj, input, fn, hooks);
     },
     infiniteHandler($state){
-      let md = require("markdown-it")();
-      this.axios.get("/api/article/articles", {
-        params: {
-          current: this.current
-        }
-      })
-          .then(( res ) => {
-            const cons = res.data;
-            if (cons.data.length>0) {
-              // console.log(cons.data.articleList[0])
-              cons.data.forEach(item => {
-                item.articleContent = md
-                    .render(item.articleContent)
-                    .replace(/<\/?[^>]*>/g, "")
-                    .replace(/[|]*\n/, "")
-                    .replace(/&nbsp;/gi, "");
-              });
-              this.articleList.push(...cons.data);
-              this.current++;
-              $state.loaded();
-            } else {
-              $state.complete();
-            }
-          });
+      console.log($state);
+      // let md = require("markdown-it")();
+      // this.axios.get("/api/article/articles", {
+      //   params: {
+      //     current: this.current
+      //   }
+      // }).then(( res ) => {
+      //     const cons = res.data;
+      //     if (cons.data.length>0) {
+      //       // console.log(cons.data.articleList[0])
+      //       cons.data.forEach(item => {
+      //         item.articleContent = md
+      //           .render(item.articleContent)
+      //           .replace(/<\/?[^>]*>/g, "")
+      //           .replace(/[|]*\n/, "")
+      //           .replace(/&nbsp;/gi, "");
+      //       });
+      //       this.articleList.push(...cons.data);
+      //       this.current++;
+      //       $state.loaded();
+      //     } else {
+      //       $state.complete();
+      //     }
+      //   });
     },
     // 初始化
     scrollDown() {

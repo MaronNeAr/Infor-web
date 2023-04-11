@@ -46,8 +46,8 @@
 
 <script>
 // import IdCardBack from '../cards/IdCardBack.vue';
-import IdCardFront from '../cards/IdCardFront.vue';
-import DriverLicense from '../cards/DriverLicense.vue';
+import IdCardFront from './cards/IdCardFront.vue';
+import DriverLicense from './cards/DriverLicense.vue';
 import axios from 'axios';
 
 export default {
