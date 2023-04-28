@@ -21,28 +21,28 @@ export default {
     if (QC.Login.check()) {
       QC.Login.getMe(function(openId, accessToken) {
         that.axios
-            .post("/api/user/oauth/qq", {
-              openId: openId,
-              accessToken: accessToken
-            })
-            .then((res) => {
-              const cons = res.data;
-              // console.log(cons)
-              if (cons.flag) {
-                //保存登录状态
-                that.$store.commit("loginBlog", cons.data);
-                if (cons.data.user.email == null) {
-                  that.$toast({
-                    type: "warning",
-                    message: "请绑定邮箱以便及时收到回复"
-                  });
-                } else {
-                  that.$toast({ type: "success", message: cons.message });
-                }
+          .post("/api/user/oauth/qq", {
+            openId: openId,
+            accessToken: accessToken
+          })
+          .then(res => {
+            const cons = res.data;
+            // console.log(cons)
+            if (cons.flag) {
+              //保存登录状态
+              that.$store.commit("loginBlog", cons.data);
+              if (cons.data.user.email == null) {
+                that.$toast({
+                  type: "warning",
+                  message: "请绑定邮箱以便及时收到回复"
+                });
               } else {
-                that.$toast({ type: "error", message: cons.message });
+                that.$toast({ type: "success", message: cons.message });
               }
-            });
+            } else {
+              that.$toast({ type: "error", message: cons.message });
+            }
+          });
       });
     } else {
       that.$toast({ type: "error", message: "系统错误！" });

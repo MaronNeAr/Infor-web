@@ -19,9 +19,14 @@ import InfiniteLoading from "vue-infinite-loading";
 import "highlight.js/styles/atom-one-dark.css";
 import VueImageSwipe from "vue-image-swipe";
 import "vue-image-swipe/dist/vue-image-swipe.css";
-import '@mdi/font/css/materialdesignicons.css';
+import "@mdi/font/css/materialdesignicons.css";
 import Toast from "./components/toast/index";
 
+import Element from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+
+
+Vue.use(Element);
 
 Vue.prototype.config = config;
 Vue.config.productionTip = false;
@@ -32,6 +37,7 @@ Vue.use(InfiniteLoading);
 Vue.use(VueAxios, axios);
 Vue.use(VueImageSwipe);
 Vue.use(Toast);
+// Vue.use(CKEDITOR);
 
 Vue.filter("date", function(value) {
   return dayjs(value).format("YYYY-MM-DD");
@@ -62,4 +68,3 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount("#app");
-

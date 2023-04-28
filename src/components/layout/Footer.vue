@@ -1,13 +1,18 @@
 <template>
   <v-footer app padless absolute v-if="!this.isMessage">
     <div class="footer-wrap">
-      <div style="font-weight: bolder">Copyright &copy;
+      <div style="font-weight: bolder">
+        Copyright &copy;
         {{ blogInfo.websiteConfig.websiteCreateTime | year }}
         -
         {{ new Date().getFullYear() }} By
         {{ blogInfo.websiteConfig.websiteAuthor }}
       </div>
-      <a href="https://beian.miit.gov.cn" target="_blank" style="font-weight: bolder">
+      <a
+        href="https://beian.miit.gov.cn"
+        target="_blank"
+        style="font-weight: bolder"
+      >
         {{ blogInfo.websiteConfig.websiteRecordNo }}
       </a>
     </div>
@@ -24,7 +29,7 @@ export default {
       return this.$store.state.blogInfo;
     }
   }
-}
+};
 </script>
 
 <style scoped>

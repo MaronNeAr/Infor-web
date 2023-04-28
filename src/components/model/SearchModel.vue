@@ -11,7 +11,7 @@
       </div>
       <!-- 输入框 -->
       <div class="search-input-wrapper">
-        <svg class="icon" aria-hidden="true" style="margin-right: 5px">
+        <svg class="icon" aria-hidden="true" style="margin-right: 4px">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
         <input v-model="keywords" placeholder="输入文章标题或内容..." />
@@ -21,7 +21,11 @@
       <div class="search-result-wrapper">
         <hr class="divider" />
         <ul>
-          <li class="search-reslut" v-for="item of articleList" :key="item.articleId">
+          <li
+            class="search-reslut"
+            v-for="item of articleList"
+            :key="item.articleId"
+          >
             <!-- 文章标题 -->
             <a @click="goTo(item.articleId)" v-html="item.articleTitle" />
             <!-- 文章内容 -->
@@ -92,21 +96,21 @@ export default {
       // let md = require("markdown-it")();
       this.flag = value.trim() != "" ? true : false;
       this.axios
-          .get("/api/article/search", {
-            params: { current: 1, keywords: value }
-          })
-          .then((res) => {
-            const cons = res.data;
-            // 去掉markdown标签
-            // cons.data.articleList.forEach(item => {
-            //   item.articleContent = md
-            //       .render(item.articleContent)
-            //       .replace(/<\/?[^>]*>/g, "")
-            //       .replace(/[|]*\n/, "")
-            //       .replace(/&npsp;/gi, "");
-            // });
-            this.articleList = cons.data;
-          });
+        .get("/api/article/search", {
+          params: { current: 1, keywords: value }
+        })
+        .then(res => {
+          const cons = res.data;
+          // 去掉markdown标签
+          // cons.data.articleList.forEach(item => {
+          //   item.articleContent = md
+          //       .render(item.articleContent)
+          //       .replace(/<\/?[^>]*>/g, "")
+          //       .replace(/[|]*\n/, "")
+          //       .replace(/&npsp;/gi, "");
+          // });
+          this.articleList = cons.data;
+        });
     }
   }
 };

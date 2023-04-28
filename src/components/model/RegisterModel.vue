@@ -27,11 +27,11 @@
         <!-- 验证码 -->
         <div class="mt-7 send-wrapper">
           <v-text-field
-                  maxlength="6"
-                  v-model="code"
-                  label="验证码"
-                  placeholder="请输入6位验证码"
-                  @keyup.enter="register"
+            maxlength="6"
+            v-model="code"
+            label="验证码"
+            placeholder="请输入6位验证码"
+            @keyup.enter="register"
           />
           <v-btn text small :disabled="flag" @click="sendCode">
             {{ codeMsg }}
@@ -60,7 +60,7 @@ export default {
   data: function() {
     return {
       username: "",
-      email:"",
+      email: "",
       code: "",
       password: "",
       flag: true,
@@ -98,17 +98,17 @@ export default {
       }
       const user = {
         username: this.email,
-        email:this.email,
+        email: this.email,
         password: this.password,
         code: this.code
       };
-      this.axios.post("/api/user/registerUser", user).then((res) => {
+      this.axios.post("/api/user/registerUser", user).then(res => {
         const cons = res.data;
         if (cons.flag) {
-          this.username="";
-          this.email="";
-          this.password="";
-          this.code="";
+          this.username = "";
+          this.email = "";
+          this.password = "";
+          this.code = "";
           this.$store.commit("closeModel");
           this.$toast({ type: "success", message: cons.message });
         } else {
@@ -123,25 +123,28 @@ export default {
         this.$toast({ type: "error", message: "邮箱格式不正确" });
         return false;
       }
-          //发送邮件
+      //发送邮件
       // eslint-disable-next-line no-undef
-      let captcha = new TencentCaptcha(this.config.TENCENT_CAPTCHA_BLOG, function(res) {
-            if (res.ret === 0) {
-                that.axios
-                  .get("/api/user/sendEmailCode", {
-                    params: { email: that.email }
-                  })
-                  .then((res) => {
-                    const cons = res.data
-                    if (cons.flag) {
-                      that.countDown();
-                      that.$toast({ type: "success", message: cons.message });
-                    } else {
-                      that.$toast({ type: "error", message: cons.message });
-                    }
-                  });
-            }
-      });
+      let captcha = new TencentCaptcha(
+        this.config.TENCENT_CAPTCHA_BLOG,
+        function(res) {
+          if (res.ret === 0) {
+            that.axios
+              .get("/api/user/sendEmailCode", {
+                params: { email: that.email }
+              })
+              .then(res => {
+                const cons = res.data;
+                if (cons.flag) {
+                  that.countDown();
+                  that.$toast({ type: "success", message: cons.message });
+                } else {
+                  that.$toast({ type: "error", message: cons.message });
+                }
+              });
+          }
+        }
+      );
       // 显示验证码
       captcha.show();
     },
@@ -157,7 +160,7 @@ export default {
           this.flag = false;
         }
       }, 1000);
-    },
+    }
   },
   computed: {
     registerFlag: {
@@ -176,7 +179,7 @@ export default {
       return true;
     }
   },
-  watch:{
+  watch: {
     email(value) {
       let reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (reg.test(value)) {
@@ -186,7 +189,5 @@ export default {
       }
     }
   }
-}
+};
 </script>
-
-

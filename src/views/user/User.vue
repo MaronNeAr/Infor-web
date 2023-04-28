@@ -11,7 +11,7 @@
         <v-col md="3" cols="12">
           <button id="pick-avatar">
             <v-avatar size="140">
-              <img :src="this.$store.state.avatar"  alt=""/>
+              <img :src="this.$store.state.avatar" alt="" />
             </v-avatar>
           </button>
           <avatar-cropper
@@ -40,12 +40,18 @@
           />
           <div v-if="loginType != 0" class="mt-7 binding">
             <v-text-field
-                disabled
-                v-model="email"
-                label="邮箱号"
-                placeholder="请绑定邮箱"
+              disabled
+              v-model="email"
+              label="邮箱号"
+              placeholder="请绑定邮箱"
             />
-            <v-btn v-if="email" text small @click="openEmailModel" class="bind-email">
+            <v-btn
+              v-if="email"
+              text
+              small
+              @click="openEmailModel"
+              class="bind-email"
+            >
               修改绑定
             </v-btn>
             <v-btn v-else text small @click="openEmailModel" class="bind-email">
@@ -69,14 +75,14 @@ export default {
         userId: this.$store.state.userId,
         nickname: this.$store.state.nickname,
         intro: this.$store.state.intro,
-        webSite: this.$store.state.webSite,
+        webSite: this.$store.state.webSite
       }
     };
   },
   methods: {
     // 更新用户信息
     updateUserInfo() {
-      this.axios.put("/api/user/info", this.userInfo).then((res) => {
+      this.axios.put("/api/user/info", this.userInfo).then(res => {
         const cons = res.data;
         if (cons.flag) {
           this.$store.commit("updateUserInfo", this.userInfo);
@@ -99,7 +105,7 @@ export default {
       this.$store.state.emailFlag = true;
     }
   },
-  computed:{
+  computed: {
     email() {
       return this.$store.state.email;
     },
@@ -120,10 +126,10 @@ export default {
 </script>
 
 <style scoped>
-.bind-email{
+.bind-email {
   position: relative;
   right: -444px;
-  top: -52px
+  top: -52px;
 }
 .info-title {
   font-size: 1.25rem;

@@ -82,15 +82,17 @@ export default {
         return false;
       }
       // eslint-disable-next-line no-undef
-      let captcha = new TencentCaptcha(this.config.TENCENT_CAPTCHA_BLOG, function(res) {
-        if (res.ret === 0) {
-          //发送邮件
-          that.axios
+      let captcha = new TencentCaptcha(
+        this.config.TENCENT_CAPTCHA_BLOG,
+        function(res) {
+          if (res.ret === 0) {
+            //发送邮件
+            that.axios
               .get("/api/user/sendEmailCode", {
                 params: { email: that.email }
               })
-              .then((res) => {
-                const cons = res.data
+              .then(res => {
+                const cons = res.data;
                 if (cons.flag) {
                   that.countDown();
                   that.$toast({ type: "success", message: cons.message });
@@ -98,8 +100,9 @@ export default {
                   that.$toast({ type: "error", message: cons.message });
                 }
               });
+          }
         }
-      });
+      );
       // 显示验证码
       captcha.show();
     },
@@ -136,7 +139,7 @@ export default {
         password: this.password,
         code: this.code
       };
-      this.axios.post("/api/user/forgetPassword", user).then((res) => {
+      this.axios.post("/api/user/forgetPassword", user).then(res => {
         const cons = res.data;
         if (cons.flag) {
           this.$store.commit("closeModel");

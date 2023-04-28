@@ -22,12 +22,6 @@
     <ForgetModel></ForgetModel>
     <!-- 绑定邮箱模态框 -->
     <EmailModel></EmailModel>
-    <!-- 音乐播放器 -->
-    <Player v-if="blogInfo.websiteConfig.isMusicPlayer == 1 && !isMobile"/>
-    <!-- <Player v-if="true && !isMobile"/> -->
-    <!-- 聊天室 -->
-    <ChatRoom v-if="blogInfo.websiteConfig.isChatRoom == 1"></ChatRoom>
-    <!-- <ChatRoom v-if="true"></ChatRoom> -->
   </v-app>
 </template>
 
@@ -40,26 +34,14 @@ import searchModel from "./components/model/SearchModel";
 import LoginModel from "./components/model/LoginModel";
 import RegisterModel from "./components/model/RegisterModel";
 import ForgetModel from "./components/model/ForgetModel";
-import EmailModel from "./components/model/EmailModel"
-import Player from "./components/zw-player/player.vue";
-import ChatRoom from "./components/ChatRoom";
+import EmailModel from "./components/model/EmailModel";
+
+// import Player from "./components/zw-player/player.vue";
+// import ChatRoom from "./components/ChatRoom";
 export default {
   created() {
-    // 获取博客信息
-    this.getBlogInfo();
-    // 上传访客信息
-    // this.axios.post("/api/blogInfo/report");
   },
-  methods:{
-    getBlogInfo() {
-      // this.axios.get("/api/blogInfo/getBlogInfo").then(({data}) => {
-      //   if (data.flag) {
-      //     console.log("12345", data.data);
-      //     this.$store.commit("checkBlogInfo", data.data);
-      //   }
-      // });
-      // console.log(this.$store.state.blogInfo);
-    },
+  methods: {
   },
   components: {
     TopNavBar,
@@ -71,16 +53,16 @@ export default {
     RegisterModel,
     ForgetModel,
     EmailModel,
-    Player,
-    ChatRoom
+    // Player,
+    // ChatRoom
   },
-  computed:{
-    blogInfo() {
-      return this.$store.state.blogInfo;
-    },
+  computed: {
+    // blogInfo() {
+    //   return this.$store.state.blogInfo;
+    // },
     isMobile() {
       const flag = navigator.userAgent.match(
-          /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
       );
       return flag;
     }
@@ -88,6 +70,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

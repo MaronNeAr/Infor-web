@@ -40,7 +40,7 @@ export default {
       });
     }
   },
-  computed:{
+  computed: {
     cover() {
       var cover = "";
       this.$store.state.blogInfo.pageList.forEach(item => {

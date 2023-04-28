@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition name="dis_list" >
+    <transition name="dis_list">
       <div class="list_box" v-if="listIsDis">
         <transition name="music_alert">
           <span class="music_alert" v-if="musicAlertState">{{

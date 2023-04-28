@@ -2,18 +2,14 @@
   <div>
     <!-- 聊天界面 -->
     <div
-        class="chat-container animated bounceInUp"
-        v-show="isShow"
-        @click="closeAll"
-        @contextmenu.prevent.stop="closeAll"
+      class="chat-container animated bounceInUp"
+      v-show="isShow"
+      @click="closeAll"
+      @contextmenu.prevent.stop="closeAll"
     >
       <!-- 标题 -->
       <div class="header">
-        <img
-            width="32"
-            height="32"
-            src="../assets/icon/chaticon.svg"
-        />
+        <img width="32" height="32" src="../assets/icon/chaticon.svg" />
         <div style="margin-left:12px">
           <div>聊天室</div>
           <div style="font-size:12px">当前{{ count }}人在线</div>
@@ -26,17 +22,17 @@
       <div class="message" id="message">
         <!-- 录音遮罩层 -->
         <div
-            v-show="voiceActive"
-            class="voice"
-            @mousemove.prevent.stop="translationmove($event)"
-            @mouseup.prevent.stop="translationEnd($event)"
+          v-show="voiceActive"
+          class="voice"
+          @mousemove.prevent.stop="translationmove($event)"
+          @mouseup.prevent.stop="translationEnd($event)"
         >
           <v-icon ref="voiceClose" class="close-voice">mdi-close</v-icon>
         </div>
         <div
-            :class="isMyMessage(item)"
-            v-for="(item, index) of chatRecordList"
-            :key="index"
+          :class="isMyMessage(item)"
+          v-for="(item, index) of chatRecordList"
+          :key="index"
         >
           <!-- 头像 -->
           <img :src="item.avatar" :class="isleft(item)" />
@@ -47,34 +43,34 @@
             </div>
             <!-- 内容 -->
             <div
-                ref="content"
-                @contextmenu.prevent.stop="showBack(item, index, $event)"
-                :class="isMyContent(item)"
+              ref="content"
+              @contextmenu.prevent.stop="showBack(item, index, $event)"
+              :class="isMyContent(item)"
             >
               <!-- 文字消息 -->
               <div v-if="item.type == 3" v-html="item.content" />
               <!-- 语音消息 -->
               <div v-if="item.type == 5" @click.prevent.stop="playVoice(item)">
                 <audio
-                    @ended="endVoice(item)"
-                    @canplay="getVoiceTime(item)"
-                    ref="voices"
-                    :src="item.content"
-                    style="display:none"
+                  @ended="endVoice(item)"
+                  @canplay="getVoiceTime(item)"
+                  ref="voices"
+                  :src="item.content"
+                  style="display:none"
                 />
                 <!-- 播放 -->
                 <v-icon
-                    :color="isSelf(item) ? '#fff' : '#000'"
-                    ref="plays"
-                    style="display:inline-flex;cursor: pointer;"
+                  :color="isSelf(item) ? '#fff' : '#000'"
+                  ref="plays"
+                  style="display:inline-flex;cursor: pointer;"
                 >
                   mdi-arrow-right-drop-circle
                 </v-icon>
                 <!-- 暂停 -->
                 <v-icon
-                    :color="isSelf(item) ? '#fff' : '#000'"
-                    ref="pauses"
-                    style="display:none;cursor: pointer;"
+                  :color="isSelf(item) ? '#fff' : '#000'"
+                  ref="pauses"
+                  style="display:none;cursor: pointer;"
                 >
                   mdi-pause-circle
                 </v-icon>
@@ -97,44 +93,44 @@
         <div class="emoji-border" v-show="isEmoji" />
         <!-- 切换输入方式 -->
         <v-icon
-            v-show="!isVoice"
-            @click="isVoice = !isVoice"
-            style="margin-right: 8px"
+          v-show="!isVoice"
+          @click="isVoice = !isVoice"
+          style="margin-right: 8px"
         >
           mdi-microphone
         </v-icon>
         <v-icon
-            v-show="isVoice"
-            @click="isVoice = !isVoice"
-            style="margin-right: 8px"
+          v-show="isVoice"
+          @click="isVoice = !isVoice"
+          style="margin-right: 8px"
         >
           mdi-keyboard
         </v-icon>
         <!-- 文字输入 -->
         <textarea
-            v-show="!isVoice"
-            ref="chatInput"
-            v-model="content"
-            @keydown.enter="saveMessage($event)"
-            placeholder="请输入内容"
+          v-show="!isVoice"
+          ref="chatInput"
+          v-model="content"
+          @keydown.enter="saveMessage($event)"
+          placeholder="请输入内容"
         />
         <!-- 语音输入 -->
         <button
-            class="voice-btn"
-            v-show="isVoice"
-            @mousedown.prevent.stop="translationStart"
-            @mouseup.prevent.stop="translationEnd($event)"
-            @touchstart.prevent.stop="translationStart"
-            @touchend.prevent.stop="translationEnd($event)"
-            @touchmove.prevent.stop="translationmove($event)"
+          class="voice-btn"
+          v-show="isVoice"
+          @mousedown.prevent.stop="translationStart"
+          @mouseup.prevent.stop="translationEnd($event)"
+          @touchstart.prevent.stop="translationStart"
+          @touchend.prevent.stop="translationEnd($event)"
+          @touchmove.prevent.stop="translationmove($event)"
         >
           按住说话
         </button>
         <!-- 表情 -->
         <i
-            class="iconfont iconbiaoqing emoji"
-            :style="isEmoji ? 'color:#FFC83D' : ''"
-            @click.prevent.stop="openEmoji"
+          class="iconfont iconbiaoqing emoji"
+          :style="isEmoji ? 'color:#FFC83D' : ''"
+          @click.prevent.stop="openEmoji"
         />
         <!-- 发送按钮 -->
         <i :class="isInput" @click="saveMessage" style="font-size: 1.5rem" />
@@ -143,11 +139,7 @@
     <!-- 未读数量 -->
     <div class="chat-btn" @click="open">
       <span class="unread" v-if="unreadCount > 0">{{ unreadCount }}</span>
-      <img
-          width="80%"
-          height="80%"
-          src="../assets/icon/chaticon.svg"
-      />
+      <img width="80%" height="80%" src="../assets/icon/chaticon.svg" />
     </div>
   </div>
 </template>
@@ -193,7 +185,7 @@ export default {
   methods: {
     open() {
       if (this.websocket == null) {
-        console.log("连接失败啊啊啊啊！！！")
+        console.log("连接失败啊啊啊啊！！！");
         this.connect();
       }
       this.unreadCount = 0;
@@ -284,9 +276,9 @@ export default {
       var reg = /\[.+?\]/g;
       this.content = this.content.replace(reg, function(str) {
         return (
-            "<img src= '" +
-            EmojiList[str] +
-            "' width='24'height='24' style='margin: 0 1px;vertical-align: text-bottom'/>"
+          "<img src= '" +
+          EmojiList[str] +
+          "' width='24'height='24' style='margin: 0 1px;vertical-align: text-bottom'/>"
         );
       });
       var socketMsg = {
@@ -314,8 +306,8 @@ export default {
         item.style.display = "none";
       });
       if (
-          item.ipAddress == this.ipAddress ||
-          (item.userId != null && item.userId == this.userId)
+        item.ipAddress == this.ipAddress ||
+        (item.userId != null && item.userId == this.userId)
       ) {
         this.$refs.backBtn[index].style.left = e.offsetX + "px";
         this.$refs.backBtn[index].style.bottom = e.offsetY + "px";
@@ -348,14 +340,14 @@ export default {
       that.rc = new Recorderx();
       that.$nextTick(() => {
         that.rc
-            .start()
-            .then(() => {
-              that.startVoiceTime = new Date();
-              console.log("start recording");
-            })
-            .catch(error => {
-              console.log("Recording failed.", error);
-            });
+          .start()
+          .then(() => {
+            that.startVoiceTime = new Date();
+            console.log("start recording");
+          })
+          .catch(error => {
+            console.log("Recording failed.", error);
+          });
       });
     },
     // 录音结束
@@ -400,23 +392,23 @@ export default {
       if (player.paused) {
         player.play();
         this.$refs.plays[this.voiceList.indexOf(item.id)].$el.style.display =
-            "none";
+          "none";
         this.$refs.pauses[this.voiceList.indexOf(item.id)].$el.style.display =
-            "inline-flex";
+          "inline-flex";
       } else {
         this.$refs.plays[this.voiceList.indexOf(item.id)].$el.style.display =
-            "inline-flex";
+          "inline-flex";
         this.$refs.pauses[this.voiceList.indexOf(item.id)].$el.style.display =
-            "none";
+          "none";
         player.pause();
       }
     },
     // 语音结束
     endVoice(item) {
       this.$refs.plays[this.voiceList.indexOf(item.id)].$el.style.display =
-          "inline-flex";
+        "inline-flex";
       this.$refs.pauses[this.voiceList.indexOf(item.id)].$el.style.display =
-          "none";
+        "none";
     },
     // 获取语音时长
     getVoiceTime(item) {
@@ -429,23 +421,23 @@ export default {
         }
       }
       this.$refs.voiceTimes[this.voiceList.indexOf(item.id)].innerHTML =
-          " " + str + " " + time + " ''";
+        " " + str + " " + time + " ''";
     }
   },
   computed: {
     isSelf() {
       return function(item) {
         return (
-            item.ipAddress == this.ipAddress ||
-            (item.userId != null && item.userId == this.userId)
+          item.ipAddress == this.ipAddress ||
+          (item.userId != null && item.userId == this.userId)
         );
       };
     },
     isleft() {
       return function(item) {
         return this.isSelf(item)
-            ? "user-avatar right-avatar"
-            : "user-avatar left-avatar";
+          ? "user-avatar right-avatar"
+          : "user-avatar left-avatar";
       };
     },
     isMyContent() {
@@ -463,21 +455,21 @@ export default {
     },
     nickname() {
       return this.$store.state.nickname != null
-          ? this.$store.state.nickname
-          : this.ipAddress;
+        ? this.$store.state.nickname
+        : this.ipAddress;
     },
     avatar() {
       return this.$store.state.avatar != null
-          ? this.$store.state.avatar
-          : this.$store.state.blogInfo.websiteConfig.touristAvatar;
+        ? this.$store.state.avatar
+        : this.$store.state.blogInfo.websiteConfig.touristAvatar;
     },
     userId() {
       return this.$store.state.userId;
     },
     isInput() {
       return this.content.trim() != ""
-          ? "iconfont iconzhifeiji submit-btn"
-          : "iconfont iconzhifeiji";
+        ? "iconfont iconzhifeiji submit-btn"
+        : "iconfont iconzhifeiji";
     }
   }
 };
@@ -533,8 +525,8 @@ export default {
 }
 .chat-btn img {
   position: relative;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 .header {
@@ -544,7 +536,7 @@ export default {
   background: #ffffff;
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0 10px 15px -16px rgba(50, 50, 93, 0.08),
-  0 4px 6px -8px rgba(50, 50, 93, 0.04);
+    0 4px 6px -8px rgba(50, 50, 93, 0.04);
 }
 .footer {
   padding: 8px 16px;

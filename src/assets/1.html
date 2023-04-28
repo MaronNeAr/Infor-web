@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CKEditor 5 – CKBox sample</title>
+    <style>
+        #container {
+            width: 1000px;
+            margin: 20px auto;
+        }
+        .ck-editor__editable[role="textbox"] {
+            /* editing area */
+            min-height: 200px;
+        }
+        .ck-content .image {
+            /* block images */
+            max-width: 80%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>CKEditor 5 – CKBox sample</h1>
+
+    <script setup>
+        let jwt = require("jsonwebtoken")
+        let axios = require('axios') 
+        const ENVIRONMENT_ID = '97jmjx0zNuj6jG0mMuBY'; // Provide your environment ID
+        const ACCESS_KEY = 'LMc6PVgsAKiMRp37xqQSGTFUtl5fdIjijOJ1BudNidXIUwYAG28g6kcEEV9L'; // Provide your access key
+      
+        const getToken = (userId) => {
+          return jwt.sign({
+              aud: ENVIRONMENT_ID,
+              sub: userId,
+            },
+            ACCESS_KEY, {
+              algorithm: 'HS256'
+            }
+          );
+        };
+      
+        axios.get('https://api.ckbox.io/categories', {
+            headers: {
+              Authorization: getToken('1')
+            }
+          })
+          .then(response => console.dir(response.data, {
+            depth: 5
+          }))
+          .catch(error => console.error(error.response.data));
+      </script>
+</body>
+</html>

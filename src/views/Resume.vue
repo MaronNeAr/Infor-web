@@ -1,9 +1,19 @@
 <template>
 <div>
     <!-- banner -->
-    <div class="banner" :style="cover">
-        <h1 class="banner-title">简历解析</h1>
-    </div>
+    <div class="banner1">
+            <div class="certificate">
+                <div class="certificate-title" style="display: flex;">
+                    <div class="certificate-title-1" style="font-size: 80px;z-index:1 !important;">简历</div>
+                    <div class="certificate-title-2" style="font-size: 80px;z-index:3 !important;">解析</div>
+                </div>
+                <div class="certificate-icon">
+                    <img src="@/assets/img/banner-resume.png" alt="Certificate Icon" />
+                </div>
+            </div>
+            <div class="purple-circle"></div>
+            <div class="top-right-element yellow-glass"></div>
+        </div>
     <div class="scroll-down" @click="scrollDown">
         <v-icon color="#fff" class="scroll-down-effects" style="font-size: 60px">
             mdi-chevron-down
@@ -136,6 +146,7 @@
         <v-row>
             <v-col cols="10"></v-col>
             <v-col cols="1">
+                <!-- <router-link to="/resume-view"></router-link> -->
                 <v-btn color="green" dark @click="exportResume">导出</v-btn>
             </v-col>
             <v-col cols="1">
@@ -143,15 +154,17 @@
             </v-col>
         </v-row>
     </v-card>
-    <!-- <iframe src="http://127.0.0.1:8888/document/resume.pdf" class="resume-view"></iframe> -->
+    <resume-view :dialog="dialog" @cancel="dialog = false" :parentData="currentDate"></resume-view>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
 import { Base64 } from 'js-base64';
+import ResumeView from '@/components/ResumeView.vue';
 
 export default {
+    components: { ResumeView },
     data() {
         return {
             file: null,
@@ -177,6 +190,7 @@ export default {
             productDesc: "",
             selfSkill: "",
             selfEvaluate: "",
+            dialog: false,
             menu1Show: false,
             menu2Show: false,
             menu3Show: false,
@@ -223,10 +237,9 @@ export default {
             const params = new URLSearchParams();
             params.append('account', 'test');
             await axios.post('/api/resume', params).then((response => {
-                console.log(response);
                 const resultData = response.data.data;
-                console.log(this.name);
-                console.log(resultData);
+                // console.log(this.name);
+                // console.log(resultData);
                 if (resultData == null) return;
                 this.name = resultData.name == "null"? "" : resultData.name;
                 this.countryCode = resultData.countryCode == "null" ? "" : resultData.countryCode;
@@ -317,13 +330,18 @@ export default {
         },
         exportResume() {
             // window.open("http://127.0.0.1:8888/document/resume.pdf");
-            window.open('http://127.0.0.1:8012/onlinePreview?url=' + Base64.encode('http://124.220.209.244:8005/img/test/test.pdf'));
+            const url = 'http://127.0.0.1:8012/onlinePreview?url=' + Base64.encode('http://124.220.209.244:8005/img/test/test.pdf');
+            console.log(url);
+            this.dialog = true;
         }
     },
     computed: {
         cover() {
             var cover = "https://static.ran-feiran.cn/config/46e10dc661d6b3291dce0c9b7f2c2147.jpg";
             return "background: url(" + cover + ") center center / cover no-repeat";
+        },
+        currentDate() {
+            return this._data;
         }
     }
 };
@@ -335,7 +353,9 @@ export default {
     width: 95%;
     left: 5%;
 }
-
+.blog-container{
+    margin-top:-20px ;
+}
 .mouble-name {
     line-height: 0px;
 }
@@ -412,4 +432,20 @@ export default {
     height: 800px;
     top: 0%;
 }
+.certificate-icon {
+        position: relative;
+        z-index: 2;
+        margin-left: 50px;
+
+    }
+
+    .certificate-icon img {
+        width: 250px;
+        height: auto;
+    }
+
+    .certificate-title {
+        position: relative;
+        margin-left: 50px;
+    }
 </style>

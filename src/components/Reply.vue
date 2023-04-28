@@ -80,7 +80,7 @@ export default {
       };
 
       this.commentContent = "";
-      this.axios.post("/api/comment/comments", comment).then((res) => {
+      this.axios.post("/api/comment/comments", comment).then(res => {
         const cons = res.data;
         if (cons.flag) {
           this.$emit("reloadReply", this.index);
@@ -89,7 +89,6 @@ export default {
           this.$toast({ type: "error", message: cons.message });
         }
       });
-
     },
 
     addEmoji(text) {

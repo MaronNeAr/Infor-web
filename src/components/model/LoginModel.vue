@@ -44,16 +44,16 @@
           <div class="social-login-wrapper">
             <!-- 微博登录 -->
             <a
-                v-if="showLogin('weibo')"
-                class="mr-3 iconfont iconweibo"
-                style="color:#e05244"
+              v-if="showLogin('weibo')"
+              class="mr-3 iconfont iconweibo"
+              style="color:#e05244"
             />
             <!-- qq登录 -->
             <a
-                v-if="showLogin('qq')"
-                class="iconfont iconqq"
-                style="color:#00AAEE"
-                @click="qqLogin"
+              v-if="showLogin('qq')"
+              class="iconfont iconqq"
+              style="color:#00AAEE"
+              @click="qqLogin"
             />
           </div>
         </div>
@@ -116,29 +116,31 @@ export default {
         return false;
       }
       const that = this;
-      let param={
+      let param = {
         username: this.username,
         password: this.password
       };
       // 图形验证码
       // eslint-disable-next-line no-undef
-      let captcha = new TencentCaptcha(this.config.TENCENT_CAPTCHA_BLOG, function (res) {
-            if (res.ret === 0) {
-              that.axios.post("/api/login", param).then((res) => {
-                const cons = res.data
-                // console.log(cons)
-                if (cons.flag) {
-                  that.username = "";
-                  that.password = "";
-                  that.$store.commit("loginBlog", cons.data.user);
-                  that.$store.commit("closeModel");
-                  that.$toast({type: "success", message: cons.message});
-                } else {
-                  that.$toast({type: "error", message: cons.message});
-                }
-              });
-            }
+      let captcha = new TencentCaptcha(
+        this.config.TENCENT_CAPTCHA_BLOG,
+        function(res) {
+          if (res.ret === 0) {
+            that.axios.post("/api/login", param).then(res => {
+              const cons = res.data;
+              // console.log(cons)
+              if (cons.flag) {
+                that.username = "";
+                that.password = "";
+                that.$store.commit("loginBlog", cons.data.user);
+                that.$store.commit("closeModel");
+                that.$toast({ type: "success", message: cons.message });
+              } else {
+                that.$toast({ type: "error", message: cons.message });
+              }
+            });
           }
+        }
       );
       // 显示验证码
       captcha.show();
@@ -147,9 +149,9 @@ export default {
       // 三方授权登录路径保存
       this.$store.commit("saveLoginUrl", this.$route.path);
       if (
-          navigator.userAgent.match(
-              /(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i
-          )
+        navigator.userAgent.match(
+          /(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i
+        )
       ) {
         // eslint-disable-next-line no-undef
         QC.Login.showPopup({
@@ -158,17 +160,14 @@ export default {
         });
       } else {
         window.open(
-            "https://graph.qq.com/oauth2.0/show?which=Login&display=pc&client_id=" +
-            + this.config.QQ_APP_ID +
+          "https://graph.qq.com/oauth2.0/show?which=Login&display=pc&client_id=" +
+            +this.config.QQ_APP_ID +
             "&response_type=token&scope=all&redirect_uri=" +
             this.config.QQ_REDIRECT_URI,
-            "_self"
+          "_self"
         );
       }
-    },
-
-
-
+    }
 
     // weiboLogin() {
     //   //保留当前路径

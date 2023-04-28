@@ -6,7 +6,12 @@
     </div>
     <div class="article-list-wrapper">
       <v-row>
-        <v-col md="4" cols="12" v-for="item of articleList" :key="item.articleId">
+        <v-col
+          md="4"
+          cols="12"
+          v-for="item of articleList"
+          :key="item.articleId"
+        >
           <!-- 文章 -->
           <v-card class="animated zoomIn article-item-card">
             <div class="article-item-cover">
@@ -30,11 +35,11 @@
               <div style="margin-top:0.375rem">
                 <!-- 是否置顶 -->
                 <span v-if="item.isTop == 1">
-                <span style="color:#ff7242">
-                  <i class="iconfont iconzhiding" /> 置顶
+                  <span style="color:#ff7242">
+                    <i class="iconfont iconzhiding" /> 置顶
+                  </span>
+                  <span class="separator">|</span>
                 </span>
-                <span class="separator">|</span>
-              </span>
                 <!-- 发表时间 -->
                 <svg class="icon" aria-hidden="true" style="font-size: 18px">
                   <use xlink:href="#icon-rili"></use>
@@ -47,7 +52,8 @@
                 >
                   <svg class="icon" aria-hidden="true" style="font-size: 18px">
                     <use xlink:href="#icon-biaoqian1"></use>
-                  </svg> {{ item.categoryName }}
+                  </svg>
+                  {{ item.categoryName }}
                 </router-link>
               </div>
             </div>
@@ -86,7 +92,7 @@ export default {
     }
   },
   destroyed() {
-    document.title = "一个简单的技术分享页"
+    document.title = "一个简单的技术分享页";
   },
   data() {
     return {
@@ -108,7 +114,7 @@ export default {
             current: this.current
           }
         })
-        .then((res) => {
+        .then(res => {
           const cons = res.data;
           if (cons.data.name) {
             this.name = cons.data.name;
@@ -124,7 +130,7 @@ export default {
         });
     }
   },
-  computed:{
+  computed: {
     cover() {
       var cover = "";
       this.$store.state.blogInfo.pageList.forEach(item => {

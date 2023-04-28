@@ -95,7 +95,7 @@ export default {
     },
     computed: {
         cover() {
-            var cover = "https://static.ran-feiran.cn/config/46e10dc661d6b3291dce0c9b7f2c2147.jpg";
+            var cover = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4wwtT?ver=b795";
             return "background: url(" + cover + ") center center / cover no-repeat";
         }
     }

@@ -47,68 +47,82 @@
         <router-link to="/">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-home"></use>
-          </svg> 首页
+          </svg>
+          首页
         </router-link>
       </div>
       <div class="menus-item">
         <router-link to="/archives">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-guidang"></use>
-          </svg> 归档
+          </svg>
+          归档
         </router-link>
       </div>
       <div class="menus-item">
         <router-link to="/categories">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-fenlei"></use>
-          </svg> 分类
+          </svg>
+          分类
         </router-link>
       </div>
       <div class="menus-item">
         <router-link to="/tags">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-biaoqian"></use>
-          </svg> 标签
+          </svg>
+          标签
         </router-link>
       </div>
       <div class="menus-item">
         <router-link to="/links">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-lianjie"></use>
-          </svg> 友链
+          </svg>
+          友链
         </router-link>
       </div>
       <div class="menus-item">
         <router-link to="/about">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-zhifeiji"></use>
-          </svg> 关于
+          </svg>
+          关于
         </router-link>
       </div>
       <div class="menus-item">
         <router-link to="/message">
           <svg class="icon" aria-hidden="true" style="margin-right: 27px">
             <use xlink:href="#icon-icon_pinglun"></use>
-          </svg> 留言
+          </svg>
+          留言
         </router-link>
       </div>
       <div class="menus-item" v-if="!this.$store.state.avatar">
-        <a @click="openLogin"><svg class="icon" aria-hidden="true" style="margin-right: 27px">
-          <use xlink:href="#icon-shouye_gerenzhongxinliang"></use>
-        </svg> 登录 </a>
+        <a @click="openLogin"
+          ><svg class="icon" aria-hidden="true" style="margin-right: 27px">
+            <use xlink:href="#icon-shouye_gerenzhongxinliang"></use>
+          </svg>
+          登录
+        </a>
       </div>
       <div v-else>
         <div class="menus-item">
           <router-link to="/user">
             <svg class="icon" aria-hidden="true" style="margin-right: 27px">
               <use xlink:href="#icon-shouye_gerenzhongxinliang"></use>
-            </svg> 个人中心
+            </svg>
+            个人中心
           </router-link>
         </div>
         <div class="menus-item">
-          <a @click="logout"><svg class="icon" aria-hidden="true" style="margin-right: 27px" >
-            <use xlink:href="#icon-tuichu"></use>
-          </svg> 退出</a>
+          <a @click="logout"
+            ><svg class="icon" aria-hidden="true" style="margin-right: 27px">
+              <use xlink:href="#icon-tuichu"></use>
+            </svg>
+            退出</a
+          >
         </div>
       </div>
     </div>
@@ -180,15 +194,15 @@ export default {
       if (this.$route.path == "/user") {
         this.$router.go(-1);
       }
-      // this.axios.get("/api/logout").then((res) => {
-      //   const cons = res.data;
-      //   if (cons.flag) {
-      //     this.$store.commit("logoutBlog");
-      //     this.$toast({ type: "success", message: cons.message });
-      //   } else {
-      //     this.$toast({ type: "error", message: "注销失败" });
-      //   }
-      // });
+      this.axios.get("/api/logout").then(res => {
+        const cons = res.data;
+        if (cons.flag) {
+          this.$store.commit("logoutBlog");
+          this.$toast({ type: "success", message: cons.message });
+        } else {
+          this.$toast({ type: "error", message: "注销失败" });
+        }
+      });
     }
   }
 };

@@ -7,20 +7,20 @@
       <div class="login-wrapper">
         <!-- 用户名 -->
         <v-text-field
-            v-model="email"
-            label="邮箱号"
-            placeholder="请输入您的邮箱号"
-            clearable
-            @keyup.enter="register"
+          v-model="email"
+          label="邮箱号"
+          placeholder="请输入您的邮箱号"
+          clearable
+          @keyup.enter="register"
         />
         <!-- 验证码 -->
         <div class="mt-7 send-wrapper">
           <v-text-field
-              maxlength="6"
-              v-model="code"
-              label="验证码"
-              placeholder="请输入6位验证码"
-              @keyup.enter="register"
+            maxlength="6"
+            v-model="code"
+            label="验证码"
+            placeholder="请输入6位验证码"
+            @keyup.enter="register"
           />
           <v-btn text small :disabled="flag" @click="sendCode">
             {{ codeMsg }}
@@ -28,11 +28,11 @@
         </div>
         <!-- 按钮 -->
         <v-btn
-            class="mt-7"
-            block
-            color="blue"
-            style="color:#fff"
-            @click="saveUserEmail"
+          class="mt-7"
+          block
+          color="blue"
+          style="color:#fff"
+          @click="saveUserEmail"
         >
           绑定
         </v-btn>
@@ -68,7 +68,7 @@ export default {
         email: this.email,
         code: this.code
       };
-      this.axios.post("/api/user/saveEmail", user).then((res) => {
+      this.axios.post("/api/user/saveEmail", user).then(res => {
         const cons = res.data;
         if (cons.flag) {
           this.$store.commit("saveEmail", this.email);
@@ -89,17 +89,17 @@ export default {
         return false;
       }
       // eslint-disable-next-line no-undef
-      let captcha = new TencentCaptcha(this.config.TENCENT_CAPTCHA_BLOG, function(
-          res
-      ) {
-        if (res.ret === 0) {
-          //发送邮件
-          that.axios
+      let captcha = new TencentCaptcha(
+        this.config.TENCENT_CAPTCHA_BLOG,
+        function(res) {
+          if (res.ret === 0) {
+            //发送邮件
+            that.axios
               .get("/api/user/sendEmailCode", {
                 params: { email: that.email }
               })
-              .then((res) => {
-                const cons = res.data
+              .then(res => {
+                const cons = res.data;
                 if (cons.flag) {
                   that.countDown();
                   that.$toast({ type: "success", message: cons.message });
@@ -107,8 +107,9 @@ export default {
                   that.$toast({ type: "error", message: cons.message });
                 }
               });
+          }
         }
-      });
+      );
       // 显示验证码
       captcha.show();
     },
@@ -124,7 +125,7 @@ export default {
           this.flag = false;
         }
       }, 1000);
-    },
+    }
   },
   computed: {
     emailFlag: {
